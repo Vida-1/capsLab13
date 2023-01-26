@@ -10,12 +10,12 @@ function startEventServer() {
 
     // BUSY WORK! Whenever the hub gets a pickup or delivered event, send it to everyone!
     socket.on(EVENT_NAMES.delivered, (delivered) => {
-      console.log("HUB delivered", delivered.orderId);  // in working lab12 this said delivered.orderID but pretty sure that was a typo
+      console.log("HUB delivered by driver", socket.id, delivered.orderId);  // in working lab12 this said delivered.orderID but pretty sure that was a typo
       io.emit(EVENT_NAMES.delivered, delivered);
     });
 
     socket.on(EVENT_NAMES.pickup, (pickup) => {
-      console.log("HUB pickup", pickup.orderId);
+      console.log("HUB pickup from client", socket.id, pickup.orderId);
       io.emit(EVENT_NAMES.pickup, pickup); // if using rooms this would be: io.to("general").emit(EVENT_NAMES.pickup, pickup);
     });
   });
